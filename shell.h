@@ -9,10 +9,10 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <fcntl.h>
-#define CUSTOM_DELIM " \t\n"
+#define DELIM " \t\n"
  
 extern char **environ;
-char *custom_read_line(void);
-char **my_tokenizer(char *line);
-int execute_alternative(char **alternative_command, char **argv);
+char *customread_line(void);
+char **mytokenizer(char *line);
+int executealternative(char **alternative_command, char **argv);
 #endif

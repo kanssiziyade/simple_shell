@@ -1,23 +1,23 @@
 #include "shell.h"
 #include <stdio.h>
 /**
- *  * read_user_input - function for write a prompt
- *   *
- *    * Return: return custom_line or NULL
- *    */
-char *read_user_input(void)
+ * customread_line - function for write a prompt
+ *
+ * Return: return custom_line or NULL
+*/
+char *customread_line(void)
 {
-		char *line = NULL;
-			size_t buffer_size = 0;
-				ssize_t input_length;
+	char *custom_line = NULL;
+	size_t custom_buffer_size = 0;
+	ssize_t custom_length;
 
 
-					custom_length = getline(&line, &custom_buffer_size, stdin);
+	custom_length = getline(&custom_line, &custom_buffer_size, stdin);
 
-						if (custom_length == -1)
-								{
-										free(line);
-											return (NULL);
-												}
-							return (line);
+	if (custom_length == -1)
+	{
+	free(custom_line);
+	return (NULL);
+	}
+	return (custom_line);
 }

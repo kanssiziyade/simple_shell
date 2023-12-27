@@ -1,46 +1,46 @@
 #include "shell.h"
 /**
-* tokenizer - function the commands execute
+* mytokenizer - function the commands execute
 * @input_line: commands argument
 * Return: NULL or status
 **/
-char **tokenizer(char *input_line)
+char **mytokenizer(char *input_line)
 {
-char *token = NULL, *temp_str = NULL;
-char **token_array = NULL;
+char *my_token = NULL, *temp = NULL;
+char **command_array = NULL;
 int count = 0, index = 0;
 if (!input_line)
 {
 return (NULL);
 }
 /* Duplicate the input line */
-temp_str = strdup(input_line);
+temp = strdup(input_line);
 /* Tokenize the duplicated line */
-token = strtok(temp_str, CUSTOM_DELIM);
-if (token == NULL)
+my_token = strtok(temp, DELIM);
+if (my_token == NULL)
 {
 /* Free memory and return NULL if no tokens found */
 input_line = NULL;
-free(temp_str);
-temp_str = NULL;
+free(temp);
+temp = NULL;
 return (NULL); }
-while (token)
+while (my_token)
 {
 count++;
-token = strtok(NULL, CUSTOM_DELIM); }
-free(temp_str);
-temp_str = NULL;
-token_array = malloc(sizeof(char *) * (count + 1));
-if (!token_array)
+my_token = strtok(NULL, DELIM); }
+free(temp);
+temp = NULL;
+command_array = malloc(sizeof(char *) * (count + 1));
+if (!command_array)
 {
 input_line = NULL;
 return (NULL); }
-token = strtok(input_line, CUSTOM_DELIM);
-while (token)
+my_token = strtok(input_line, DELIM);
+while (my_token)
 {
-token_array[index] = strdup(token);
-token = strtok(NULL, CUSTOM_DELIM);
+command_array[index] = strdup(my_token);
+my_token = strtok(NULL, DELIM);
 index++; }
 input_line = NULL;
-token_array[index] = NULL;
-return (token_array); }
+command_array[index] = NULL;
+return (command_array); }
