@@ -11,7 +11,7 @@
 #include <fcntl.h>
 #define CUSTOM_DELIM " \t\n"
  
-extern char **custom_environ;
+extern char **environ;
 char *custom_read_line(void);
 char **my_tokenizer(char *line);
 int execute_alternative(char **alternative_command, char **argv);

@@ -1,4 +1,4 @@
-nclude "shell.h"
+#include "shell.h"
 #include <stdio.h>
 /**
  *  * read_user_input - function for write a prompt
