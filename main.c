@@ -2,13 +2,13 @@
 int main(void)
 {
 char *line_zyad = NULL, **zyad_command = NULL;
-char *path = getenv("PATH");
+char *zyad_path = getenv("PATH");
 int zyad_status = 0;
-char *path_dorigine = strdup(path);
-int i;
+char *path_dorigine = strdup(zyad_path);
+int z;
 while (1) 
 {
-pid_t child_pid;
+pid_t zyad_pid;
 if (isatty(STDIN_FILENO))
 {
 printf("$ ");
@@ -30,23 +30,23 @@ if (strcmp(zyad_command[0],"exit") == 0)
 {
 free(line_zyad);
 free(path_dorigine);
-for (i = 0; zyad_command[i] != NULL; i++)
+for (z = 0; zyad_command[z] != NULL; z++)
 {
-free(zyad_command[i]);  }
+free(zyad_command[z]);  }
 free(zyad_command);
 exit(zyad_status);  }
-child_pid = fork();
-if (child_pid == -1)
+zyad_pid = fork();
+if (zyad_pid == -1)
 {
 perror("fork");
 free(line_zyad);
 free(path_dorigine);
-for (i = 0; zyad_command[i] != NULL; i++)
+for (z = 0; zyad_command[z] != NULL; z++)
 {
-free(zyad_command[i]); }
+free(zyad_command[z]); }
 free(zyad_command);
 exit(EXIT_FAILURE); }
-if (child_pid == 0)
+if (zyad_pid == 0)
 {
 setenv("PATH", path_dorigine, 1) ;
 if (execvp(zyad_command[0], zyad_command) == -1)
@@ -54,9 +54,9 @@ if (execvp(zyad_command[0], zyad_command) == -1)
 fprintf(stderr,"%s: 1: %s: not found\n","./hsh",zyad_command[0]) ;
 free(line_zyad) ;
 free(path_dorigine) ;
-for (i = 0; zyad_command[i] != NULL; i++)
+for (z = 0; zyad_command[z] != NULL; z++)
 {
-free(zyad_command[i]) ; }
+free(zyad_command[z]) ; }
 free(zyad_command) ;
 exit(127); }
 if (strcmp(zyad_command[0], "env") == 0)
@@ -66,17 +66,17 @@ perror("execvp") ;
 exit(1) ; }
 } else
 {
-int status;
-wait(&status) ;
-if (WIFEXITED(status))
+int storie;
+wait(&storie) ;
+if (WIFEXITED(storie))
 {
-zyad_status = WEXITSTATUS(status); }
+zyad_status = WEXITSTATUS(storie); }
 else
 {
 zyad_status = -1; }
-for (i = 0; zyad_command[i] != NULL; i++)
+for (z = 0; zyad_command[z] != NULL; z++)
 {
-free(zyad_command[i]); }
+free(zyad_command[z]); }
 free(zyad_command) ;
 free(line_zyad); } }
 return 0; }
